@@ -6,8 +6,8 @@ create github
 
 <h2>BottomNavigationBar</h2>
 
-<p>res에 android resource directory 선택 후 menu 폴더 생성
-<p>NavigationBar 리소스 이름은 <b>bottom_menu</b>로 지정 
+<p>res에 android resource directory 선택 후 menu 폴더 생성</p>
+<p>NavigationBar 리소스 이름은 <b>bottom_menu</b>로 지정</p>
 
 ```java
 //Navigation에 들어가는 item 지정, title이 보임, item 개수에 따라 개수가 정해짐
@@ -18,9 +18,7 @@ create github
         android:icon="@drawable/write"
         android:title="Music" />
 ```
-
-menu에서 설정한 NavigatiomBar 가져오기
-
+<p>menu에서 설정한 NavigatiomBar 가져오기</p>
 ```java
 //상위 Layout이 RelativeLayout
 //bottom_menu 
