@@ -18,7 +18,9 @@ create github
         android:icon="@drawable/write"
         android:title="Music" />
 ```
+
 <p>menu에서 설정한 NavigatiomBar 가져오기</p>
+
 ```java
 //상위 Layout이 RelativeLayout
 //bottom_menu 
