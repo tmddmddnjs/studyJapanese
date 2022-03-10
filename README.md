@@ -35,3 +35,6 @@ create github
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_menu"/>
 ```
+
+- BottomNavigationBar적용 
+![1111](https://user-images.githubusercontent.com/71477375/157703614-3f25027e-5863-49f0-b76c-c286557fde95.PNG)
