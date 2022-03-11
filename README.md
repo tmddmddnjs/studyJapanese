@@ -89,3 +89,17 @@ bottom_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavig
         }
 });
 ```
+
+<h2>login화면 바꾸기 inflater</h2>
+
+<p>로그인 전 before와 후인 after를 xml로 만들어 둔 뒤, class내에서 로그인 성공 시 after로 바꿈</p>
+
+- inflater 기본 코드
+
+```java
+LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//before_login이라는 이름의 xml을 일단 디폴트로 설정
+//before_after_login이라는 activity_main.xml내의 LinearLayout의 이름을 가져와서, before_login.xml을 
+inflater.inflate(R.layout.before_login, before_after_login, true);
+```
+
