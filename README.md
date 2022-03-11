@@ -7,6 +7,7 @@ create github
 <h2>BottomNavigationBar</h2>
 
 <p>res에 android resource directory 선택 후 menu 폴더 생성</p>
+
 - NavigationBar 리소스 이름은 <b>bottom_menu</b>로 지정
 
 ```java
