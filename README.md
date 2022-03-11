@@ -77,6 +77,7 @@ bottom_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavig
         //bottom_menu의 item의 id를 가져온 것.
         case R.id.first_tab:
                 //item이름이 R.id.first_tab인 경우 musicFragment인 Framgent로 교체
+                //R.id.container는 activity_main에 있는 FrameLayout의 id이름임.
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, musicFragment).commit();
                 return true;
         case R.id.second_tab:
