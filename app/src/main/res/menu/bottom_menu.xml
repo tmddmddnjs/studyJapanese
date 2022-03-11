@@ -6,20 +6,17 @@
         android:id="@+id/first_tab"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/write"
         android:title="Music" />
     <item
         android:id="@+id/second_tab"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/mapview"
         android:title="Lyrics"/>
 
     <item
         android:id="@+id/third_tab"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/records"
         android:title="lookup">
     </item>
 
@@ -27,7 +24,6 @@
         android:id="@+id/fourth_tab"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/settings"
         android:title="study">
     </item>
 
@@ -35,7 +31,6 @@
         android:id="@+id/fifth_tab"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/mapview"
         android:title="setting"/>
 
 </menu>
