@@ -71,18 +71,20 @@ getSupportFragmentManager().beginTransaction().replace(R.id.container, musicFrag
 //bottom_mune의 xml을 가져옴.
 BottomNavigationView bottom_menu = findViewById(R.id.bottom_menu);
 bottom_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-     @Override
-     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-     switch(item.getItemId()) {
-     //bottom_menu의 item의 id를 가져온 것.
-     case R.id.first_tab:
-          getSupportFragmentManager().beginTransaction().replace(R.id.container, musicFragment).commit();
-          return true;
-     case R.id.second_tab:
-          getSupportFragmentManager().beginTransaction().replace(R.id.container, lyricsFragment).commit();
-          return true;
-     }
-     return false;
-     }
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+        //bottom_menu의 item의 id를 가져온 것.
+        case R.id.first_tab:
+                //item이름이 R.id.first_tab인 경우 musicFragment인 Framgent로 교체
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, musicFragment).commit();
+                return true;
+        case R.id.second_tab:
+                //item이름이 R.id.second_tab인 경우 lyricsFragment인 Fragment
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, lyricsFragment).commit();
+                return true;
+                }
+        return false;
+        }
 });
 ```
