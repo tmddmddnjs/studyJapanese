@@ -47,7 +47,7 @@ create github
 
 ![image](https://user-images.githubusercontent.com/71477375/157809868-413e3f40-9907-4925-971f-ee7805ae66a3.png)
 
-<p>Fragment내의 기본 소스 설정</p>
+- Fragment내의 기본 소스 설정
 
 ```java
 public class MusicFragment extends Fragment {
@@ -58,7 +58,7 @@ public class MusicFragment extends Fragment {
 }
 ```
         
-<p>Main에서 설정한 Fragment가져오기</p>
+- Main에서 설정한 Fragment가져오기
 
 
 ```java
