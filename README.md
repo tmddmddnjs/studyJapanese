@@ -39,3 +39,11 @@ create github
 - BottomNavigationBar적용 
 
 ![1111](https://user-images.githubusercontent.com/71477375/157703614-3f25027e-5863-49f0-b76c-c286557fde95.PNG)
+
+<h2>BottomNavigationBar에 Fragment설정</h2>
+
+<p>다음과 같이 BlankFragment생성</p>
+<p>일반 class가 아닌 Fragment로 생성해야함</p>
+
+![image](https://user-images.githubusercontent.com/71477375/157809868-413e3f40-9907-4925-971f-ee7805ae66a3.png)
+
