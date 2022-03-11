@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--    로그인 및 회원가입 버튼 생성-->
+    <LinearLayout
+        android:id="@+id/before_after_login_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <!--    Fragment 위치 설정-->
     <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/container">
+        android:layout_above="@+id/bottom_menu"
+        android:layout_below="@+id/before_after_login_Layout"></FrameLayout>
 
-    </FrameLayout>
-
+    <!--    BottomNavigation 불러와서 설정-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
@@ -22,6 +33,6 @@
         app:itemIconTint="#FFFFFF"
         app:itemTextColor="#f6d170"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu"/>
+        app:menu="@menu/bottom_menu" />
 
 </RelativeLayout>
