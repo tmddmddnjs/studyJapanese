@@ -94,6 +94,8 @@ bottom_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavig
 
 <h2>login화면 바꾸기 inflater</h2>
 
+<p>inflater는 액티비티 간의 전환이 아닌, 액티비티 내의 특정 LinearLayout이 있는 공간만 바꾸고 싶을 때 사용</p>
+
 - inflater 기본 코드
 
 ```java
