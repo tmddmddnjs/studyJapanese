@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.studyjapanese.Fragment.LookupFragment;
@@ -14,6 +17,7 @@ import com.example.studyjapanese.Fragment.LyricsFragment;
 import com.example.studyjapanese.Fragment.MusicFragment;
 import com.example.studyjapanese.Fragment.SettingFragment;
 import com.example.studyjapanese.Fragment.StudyFragment;
+import com.example.studyjapanese.loginInfo.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +29,22 @@ public class MainActivity extends AppCompatActivity {
     SettingFragment settingFragment;
     //로그인 전, 후마다 다른 xml가져올거
     LinearLayout before_after_login;
+    //로그인 버튼을 눌렀을 시 아이디 비밀번호 입력 창으로 이동
+
+    //변수 초기화
+    public void Init(){
+        //BottomNavigationBar에 쓰이는 Fragment들
+        musicFragment = new MusicFragment();
+        lyricsFragment = new LyricsFragment();
+        lookupFragment = new LookupFragment();
+        studyFragment = new StudyFragment();
+        settingFragment = new SettingFragment();
+        //activity_main에 있는 before_after_login_Layout라는 이름의 LinearLayout을 가져옴
+        //로그인 전에는 before_login.xml을 로그인 후에는 after_login.xml사용할거임.
+        before_after_login = findViewById(R.id.before_after_login_Layout);
+        //로그인 버튼 클릭 시
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,25 +81,24 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         //로그인 전에는 before_login.xml, 로그인 후에는 after_login.xml을 보여줄거임.
         //일단 디폴트값으로는 로그인 전화면을 띄움
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.before_login, before_after_login, true);
+        //before_login에 있는 버튼을 가져와 써야함(그래서 inflate를 먼저 하고 해야함)
+        Button loginbutton = (Button)findViewById(R.id.loginButton);
+        //로그인 버튼을 누르면 로그인 창으로.
+        loginbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //나중에 after로 ~~님 이름 가져올려면 이런 식으로 사용
 //        CheckBox checkBox = before_after_login.findViewById(R.id.checkBox);
 //        checkBox.setText("~님 환영합니다");
-    }
-    //변수 초기화
-    public void Init(){
-        //BottomNavigationBar에 쓰이는 Fragment들
-        musicFragment = new MusicFragment();
-        lyricsFragment = new LyricsFragment();
-        lookupFragment = new LookupFragment();
-        studyFragment = new StudyFragment();
-        settingFragment = new SettingFragment();
-        //activity_main에 있는 before_after_login_Layout라는 이름의 LinearLayout을 가져옴
-        //로그인 전에는 before_login.xml을 로그인 후에는 after_login.xml사용할거임.
-        before_after_login = findViewById(R.id.before_after_login_Layout);
     }
 }
