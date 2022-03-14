@@ -7,7 +7,8 @@ create github
 <h2>BottomNavigationBar</h2>
 
 <p>res에 android resource directory 선택 후 menu 폴더 생성</p>
-<p>NavigationBar 리소스 이름은 <b>bottom_menu</b>로 지정</p>
+
+- NavigationBar 리소스 이름은 <b>bottom_menu</b>로 지정
 
 ```java
 //Navigation에 들어가는 item 지정, title이 보임, item 개수에 따라 개수가 정해짐
@@ -19,7 +20,7 @@ create github
         android:title="Music" />
 ```
 
-<p>menu에서 설정한 NavigatiomBar 가져오기</p>
+- menu에서 설정한 NavigatiomBar 가져오기
 
 ```java
 //상위 Layout이 RelativeLayout
@@ -43,9 +44,10 @@ create github
 <h2>BottomNavigationBar에 Fragment설정</h2>
 
 - 다음과 같이 BlankFragment생성
-<p>일반 class가 아닌 Fragment로 생성해야함</p>
 
 ![image](https://user-images.githubusercontent.com/71477375/157809868-413e3f40-9907-4925-971f-ee7805ae66a3.png)
+
+<p>일반 class가 아닌 Fragment로 생성해야함</p>
 
 - Fragment내의 기본 소스 설정
 
@@ -89,3 +91,18 @@ bottom_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavig
         }
 });
 ```
+
+<h2>login화면 바꾸기 inflater</h2>
+
+<p>inflater는 액티비티 간의 전환이 아닌, 액티비티 내의 특정 LinearLayout이 있는 공간만 바꾸고 싶을 때 사용</p>
+
+- inflater 기본 코드
+
+```java
+LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//before_login이라는 이름의 xml을 일단 디폴트로 설정
+//before_after_login이라는 activity_main.xml내의 LinearLayout의 이름을 가져와서, before_login.xml을 
+inflater.inflate(R.layout.before_login, before_after_login, true);
+```
+
+<p>로그인 전 before와 후인 after를 xml로 만들어 둔 뒤, class내에서 로그인 성공 시 after로 바꿈</p>
