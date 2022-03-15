@@ -105,6 +105,13 @@ LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLAT
 inflater.inflate(R.layout.before_login, before_after_login, true);
 ```
 
+<p>inflater로 다른 xml의 View가져와 사용하기</p>
+<p>위에 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);가 설정되어 있으면 그대로 사용할 수 있다.</p>
+
+```java
+Button loginbutton = (Button)findViewById(R.id.loginButton);
+```
+
 <p>로그인 전 before와 후인 after를 xml로 만들어 둔 뒤, class내에서 로그인 성공 시 after로 바꿈</p>
 
 <h2>내부 Room을 이용한 DB</h2>
