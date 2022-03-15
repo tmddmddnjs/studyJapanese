@@ -266,3 +266,18 @@ for (int i = 0; i < userList.size(); i++){
 }
 Log.d("test", userList.get(1).getName()+"");
 ```
+
+<h2>ROOM 회원가입 시 아이디 중복 확인</h2>
+
+<p>checkId로 db의 모든 UserId값을 확인하면서 id와 동일한 값이 있는지 확인해본다.</p>
+
+```java
+List<User> userList = mUserDao.getUserAll();
+for (int i = 0; i < userList.size(); i++){
+        String checkId = userList.get(i).getUserId() + "";
+        if(checkId.equals(id + "")){
+                Toast.makeText(SignUpActivity.this,"아이디가 중복되었습니다.", Toast.LENGTH_SHORT).show();
+                return;
+        }
+}
+```
