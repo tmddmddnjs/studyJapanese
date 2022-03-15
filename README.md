@@ -146,6 +146,7 @@ public class User {
 
 - UserDao에서는 User데이터 베이스의 삽입, 갱신, 삭제, Query등을 만들어서 DB를 조작하는 인터페이스
 
+<p>Dao는 삽입, 갱신 등을 말함</p>
 <p>@Dao를 추가하고 @Insert등을 만들고 밑에 메소드를 만듬</p>
 <p>class가 아닌 interface로 만들어야함</p>
 
@@ -181,4 +182,77 @@ public interface UserDao {
 public abstract class UserDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 }
+```
+
+- signUpActivity클래스에서 userDao를 이용해 삽입, 갱신, 삭제를 함
+
+<p>signUPActivity클래스에서 만들어둔 User를 사용하기 위해서는 Dao 인스턴스를 만들어야함.(User.table에 정보를 건들 수 있도록) </p>
+
+```java
+public class SignUpActivity extends AppCompatActivity {
+    //ROOM이용
+    private UserDao mUserDao;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
+        
+        //UserDatabase를 이용한 db생성인데 tmddmddnjs_db는 table이름.
+        UserDatabase database = Room.databaseBuilder(getApplicationContext(), UserDatabase.class, "tmddmddnjs_db")
+                .fallbackToDestructiveMigration()   //스키마 버전 변경 가능
+                .allowMainThreadQueries()           //메인 스레드에서 DB에 IO를 가능하게 함
+                .build();
+
+        //uUserDao는 UserDao 인터페이스를 이용해, 삽입 갱신등을 함. 예시는 아래 삽입, 수정, 삭제로 확인해보자.
+        mUserDao = database.userDao();
+    }
+}
+```
+
+- 위 uUserDao를 이용해 삽입, 갱신, 삭제를 해보자
+
+<p>삽입</p>
+
+```java
+User uInsert = new User();
+        uInsert.setName("정승원");
+        uInsert.setAge("25");
+        uInsert.setPhoneNumber("010-1111-2222");
+
+        mUserDao.setInsertUser(uInsert);
+```
+
+<p>수정</p>
+
+```java
+//데이터 수정
+        User uUpdate = new User();
+        uUpdate.setId(1); //바꾸고 싶은 id 지정
+        uUpdate.setName("정유설");
+        uUpdate.setAge("24");
+        uUpdate.setPhoneNumber("010-1111-0000");
+
+        mUserDao.setUpdateUser(uUpdate);
+```
+
+<p>삭제</p>
+
+```java
+User uDelete = new User();
+        uDelete.setId(1);
+        mUserDao.setDeleteUser(uDelete);
+```
+
+<p>조회</p>
+
+```java
+//User에 있는 List를 가져오는 것
+        List<User> userList = mUserDao.getUserAll();
+        //i는 id의 값
+        for (int i = 0; i < userList.size(); i++){
+            Log.d("Test", userList.get(i).getName() + " "
+            +userList.get(i).getPhoneNumber());
+        }
+        Log.d("test", userList.get(1).getName()+"");
 ```
