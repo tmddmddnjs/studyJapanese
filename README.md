@@ -92,7 +92,7 @@ bottom_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavig
 });
 ```
 
-<h2>login화면 바꾸기 inflater</h2>
+<h2>다른 xml의 View를 가져오는 inflater</h2>
 
 <p>inflater는 액티비티 간의 전환이 아닌, 액티비티 내의 특정 LinearLayout이 있는 공간만 바꾸고 싶을 때 사용</p>
 
@@ -100,9 +100,17 @@ bottom_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavig
 
 ```java
 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//before_login이라는 이름의 xml을 일단 디폴트로 설정
+//after_login이라는 이름의 xml을 일단 디폴트로 설정
 //before_after_login이라는 activity_main.xml내의 LinearLayout의 이름을 가져와서, before_login.xml을 
-inflater.inflate(R.layout.before_login, before_after_login, true);
+inflater.inflate(R.layout.after_login, before_after_login, true);
+```
+
+<p>inflater로 다른 xml의 View가져와 사용하기</p>
+<p>위에 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);가 설정되어 있으면 그대로 사용할 수 있다.</p>
+
+```java
+TextView name = (TextView)findViewById(R.id.afterLoginTextView);
+name.setText(getName + "님 환영합니다.");
 ```
 
 <p>로그인 전 before와 후인 after를 xml로 만들어 둔 뒤, class내에서 로그인 성공 시 after로 바꿈</p>
@@ -239,9 +247,19 @@ mUserDao.setUpdateUser(uUpdate);
 <p>삭제</p>
 
 ```java
+//원하는 id 1개만 삭제
 User uDelete = new User();
 uDelete.setId(1);
 mUserDao.setDeleteUser(uDelete);
+```
+
+<p>한번에 다 삭제</p>
+
+<p>UserDao에 다음과 같은 소스 추가</p>
+
+```java
+@Query("DELETE FROM User ")
+    void deleteAll();
 ```
 
 <p>조회</p>
@@ -255,4 +273,37 @@ for (int i = 0; i < userList.size(); i++){
         +userList.get(i).getPhoneNumber());
 }
 Log.d("test", userList.get(1).getName()+"");
+```
+
+<h2>ROOM 회원가입 시 아이디 중복 확인</h2>
+
+<p>checkId로 db의 모든 UserId값을 확인하면서 id와 동일한 값이 있는지 확인해본다.</p>
+
+```java
+List<User> userList = mUserDao.getUserAll();
+for (int i = 0; i < userList.size(); i++){
+        String checkId = userList.get(i).getUserId() + "";
+        if(checkId.equals(id + "")){
+                Toast.makeText(SignUpActivity.this,"아이디가 중복되었습니다.", Toast.LENGTH_SHORT).show();
+                return;
+        }
+}
+```
+
+<h2>intent로 activity간 값 교환</h2>
+
+- 넘겨줄 때
+
+```java
+Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+putName = userList.get(i).getUserName() + "";
+intent.putExtra("이름", putName);
+startActivity(intent);
+```
+
+- 받을 때
+
+```java
+Intent intent = getIntent();
+String getName = intent.getExtras().getString("이름");
 ```
