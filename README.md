@@ -106,3 +106,153 @@ inflater.inflate(R.layout.before_login, before_after_login, true);
 ```
 
 <p>로그인 전 before와 후인 after를 xml로 만들어 둔 뒤, class내에서 로그인 성공 시 after로 바꿈</p>
+
+<h2>내부 Room을 이용한 DB</h2>
+
+- gradle의 dependencies에 다음과 같은 ROOM이용을 위한 소스 추가
+
+```java
+implementation 'androidx.room:room-runtime:2.3.0'
+```
+
+<p>만약 빌드 시 에러가 난다면 다음 implementation 위치에 annotationProcessor 'androidx.room:room-compiler:2.3.0' 추가</p>
+
+- User에 대한 정보를 get, set하는 class
+
+<p>다음과 같이 @Entity를 추가함으로 User를 DB로 사용하겠다는 뜻이고, 각각 get, set을 만들어 줘야함</p>
+<p>여기에 들어가는 userxxx들은 전부 DB에 들어가는 객체 값들</p>
+        
+```java
+@Entity
+public class User {
+    //id 값은 자동적으로 1씩 더해지도록 하는 것이 PrimaryKey이다.
+    @PrimaryKey(autoGenerate = true)
+    private int id = 0;
+
+    private String userID;
+    private String userPass;
+    private String userName;
+    private String userAge;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+}
+```
+
+- UserDao에서는 User데이터 베이스의 삽입, 갱신, 삭제, Query등을 만들어서 DB를 조작하는 인터페이스
+
+<p>Dao는 삽입, 갱신 등을 말함</p>
+<p>@Dao를 추가하고 @Insert등을 만들고 밑에 메소드를 만듬</p>
+<p>class가 아닌 interface로 만들어야함</p>
+
+```java
+@Dao
+public interface UserDao {
+    //삽입
+    @Insert
+    void setInsertUser(User user);
+
+    //수정
+    @Update
+    void setUpdateUser(User user);
+
+    //삭제
+    @Delete
+    void setDeleteUser(User user);
+
+    //DB 요청 명령문
+    @Query("SELECT * from User")
+    List<User> getUserAll();
+
+}
+```
+
+- UserDatabase는 추상으로 만들어서, @Database에 아까 User.class에서 만든 entities를 가져온다. version = 1
+
+<p>추상으로 만들고 RoomDatabase를 상속받는다.</p>
+<p>갱신 삭제 등을 하는 UserDao를 가져와서 추상메소드로 만든다.</p>
+
+```java
+@Database(entities = {User.class}, version = 1)
+public abstract class UserDatabase extends RoomDatabase {
+    public abstract UserDao userDao();
+}
+```
+
+- signUpActivity클래스에서 userDao를 이용해 삽입, 갱신, 삭제를 함
+
+<p>signUPActivity클래스에서 만들어둔 User를 사용하기 위해서는 Dao 인스턴스를 만들어야함.(User.table에 정보를 건들 수 있도록) </p>
+
+```java
+public class SignUpActivity extends AppCompatActivity {
+    //ROOM이용
+    private UserDao mUserDao;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
+        
+        //UserDatabase를 이용한 db생성인데 tmddmddnjs_db는 table이름.
+        UserDatabase database = Room.databaseBuilder(getApplicationContext(), UserDatabase.class, "tmddmddnjs_db")
+                .fallbackToDestructiveMigration()   //스키마 버전 변경 가능
+                .allowMainThreadQueries()           //메인 스레드에서 DB에 IO를 가능하게 함
+                .build();
+
+        //uUserDao는 UserDao 인터페이스를 이용해, 삽입 갱신등을 함. 예시는 아래 삽입, 수정, 삭제로 확인해보자.
+        mUserDao = database.userDao();
+    }
+}
+```
+
+- 위 uUserDao를 이용해 삽입, 갱신, 삭제를 해보자
+
+<p>삽입</p>
+
+```java
+User uInsert = new User();
+uInsert.setName("정승원");
+uInsert.setAge("25");
+uInsert.setPhoneNumber("010-1111-2222");
+
+mUserDao.setInsertUser(uInsert);
+```
+
+<p>수정</p>
+
+```java
+//데이터 수정
+User uUpdate = new User();
+uUpdate.setId(1); //바꾸고 싶은 id 지정
+uUpdate.setName("정유설");
+uUpdate.setAge("24");
+uUpdate.setPhoneNumber("010-1111-0000");
+
+mUserDao.setUpdateUser(uUpdate);
+```
+
+<p>삭제</p>
+
+```java
+User uDelete = new User();
+uDelete.setId(1);
+mUserDao.setDeleteUser(uDelete);
+```
+
+<p>조회</p>
+
+```java
+//User에 있는 List를 가져오는 것
+List<User> userList = mUserDao.getUserAll();
+//i는 id의 값
+for (int i = 0; i < userList.size(); i++){
+        Log.d("Test", userList.get(i).getName() + " "
+        +userList.get(i).getPhoneNumber());
+}
+Log.d("test", userList.get(1).getName()+"");
+```
