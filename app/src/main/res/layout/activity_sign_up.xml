@@ -7,7 +7,7 @@
     tools:context=".loginInfo.SignUpActivity">
 
     <EditText
-        android:id="@+id/et_id"
+        android:id="@+id/signUp_userId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -23,49 +23,49 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_pass"
+        android:id="@+id/signUp_userPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_id"
-        app:layout_constraintStart_toStartOf="@+id/et_id"
-        app:layout_constraintTop_toBottomOf="@+id/et_id" />
+        app:layout_constraintEnd_toEndOf="@+id/signUp_userId"
+        app:layout_constraintStart_toStartOf="@+id/signUp_userId"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_userId" />
 
     <EditText
-        android:id="@+id/et_name"
+        android:id="@+id/signUp_userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="이름"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_pass"
-        app:layout_constraintStart_toStartOf="@+id/et_pass"
-        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+        app:layout_constraintEnd_toEndOf="@+id/signUp_userPass"
+        app:layout_constraintStart_toStartOf="@+id/signUp_userPass"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_userPass" />
 
     <EditText
-        android:id="@+id/et_age"
+        android:id="@+id/signUp_userAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="나이"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_name"
-        app:layout_constraintStart_toStartOf="@+id/et_name"
-        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+        app:layout_constraintEnd_toEndOf="@+id/signUp_userName"
+        app:layout_constraintStart_toStartOf="@+id/signUp_userName"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_userName" />
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/signUp_btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="회원가입"
-        app:layout_constraintEnd_toEndOf="@+id/et_age"
-        app:layout_constraintStart_toStartOf="@+id/et_age"
-        app:layout_constraintTop_toBottomOf="@+id/et_age" />
+        app:layout_constraintEnd_toEndOf="@+id/signUp_userAge"
+        app:layout_constraintStart_toStartOf="@+id/signUp_userAge"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_userAge" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

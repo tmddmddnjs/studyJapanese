@@ -18,7 +18,7 @@
         >
 
         <EditText
-            android:id="@+id/et_id"
+            android:id="@+id/login_userId"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="아이디"
@@ -38,7 +38,7 @@
         >
 
         <EditText
-            android:id="@+id/et_pass"
+            android:id="@+id/login_userPass"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="비밀번호"
@@ -56,7 +56,7 @@
         android:layout_marginTop="20dp">
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/login_btn_login"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -64,7 +64,7 @@
             app:backgroundTint="#D18CA3" />
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/login_btn_register"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
