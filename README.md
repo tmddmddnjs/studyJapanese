@@ -239,9 +239,19 @@ mUserDao.setUpdateUser(uUpdate);
 <p>삭제</p>
 
 ```java
+//원하는 id 1개만 삭제
 User uDelete = new User();
 uDelete.setId(1);
 mUserDao.setDeleteUser(uDelete);
+```
+
+<p>한번에 다 삭제</p>
+
+<p>UserDao에 다음과 같은 소스 추가</p>
+
+```java
+@Query("DELETE FROM User ")
+    void deleteAll();
 ```
 
 <p>조회</p>
