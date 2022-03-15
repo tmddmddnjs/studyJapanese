@@ -106,3 +106,79 @@ inflater.inflate(R.layout.before_login, before_after_login, true);
 ```
 
 <p>로그인 전 before와 후인 after를 xml로 만들어 둔 뒤, class내에서 로그인 성공 시 after로 바꿈</p>
+
+<h2>내부 Room을 이용한 DB</h2>
+
+- gradle의 dependencies에 다음과 같은 ROOM이용을 위한 소스 추가
+
+```java
+implementation 'androidx.room:room-runtime:2.3.0'
+```
+
+<p>만약 빌드 시 에러가 난다면 다음 implementation 위치에 annotationProcessor 'androidx.room:room-compiler:2.3.0' 추가</p>
+
+- User에 대한 정보를 get, set하는 class
+
+<p>다음과 같이 @Entity를 추가함으로 User를 DB로 사용하겠다는 뜻이고, 각각 get, set을 만들어 줘야함</p>
+<p>여기에 들어가는 userxxx들은 전부 DB에 들어가는 객체 값들</p>
+        
+```java
+@Entity
+public class User {
+    //id 값은 자동적으로 1씩 더해지도록 하는 것이 PrimaryKey이다.
+    @PrimaryKey(autoGenerate = true)
+    private int id = 0;
+
+    private String userID;
+    private String userPass;
+    private String userName;
+    private String userAge;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+}
+```
+
+- UserDao에서는 User데이터 베이스의 삽입, 갱신, 삭제, Query등을 만들어서 DB를 조작하는 인터페이스
+
+<p>@Dao를 추가하고 @Insert등을 만들고 밑에 메소드를 만듬</p>
+<p>class가 아닌 interface로 만들어야함</p>
+
+```java
+@Dao
+public interface UserDao {
+    //삽입
+    @Insert
+    void setInsertUser(User user);
+
+    //수정
+    @Update
+    void setUpdateUser(User user);
+
+    //삭제
+    @Delete
+    void setDeleteUser(User user);
+
+    //DB 요청 명령문
+    @Query("SELECT * from User")
+    List<User> getUserAll();
+
+}
+```
+
+- UserDatabase는 추상으로 만들어서, @Database에 아까 User.class에서 만든 entities를 가져온다. version = 1
+
+<p>추상으로 만들고 RoomDatabase를 상속받는다.</p>
+<p>갱신 삭제 등을 하는 UserDao를 가져와서 추상메소드로 만든다.</p>
+
+```java
+@Database(entities = {User.class}, version = 1)
+public abstract class UserDatabase extends RoomDatabase {
+    public abstract UserDao userDao();
+}
+```
