@@ -216,43 +216,43 @@ public class SignUpActivity extends AppCompatActivity {
 
 ```java
 User uInsert = new User();
-        uInsert.setName("정승원");
-        uInsert.setAge("25");
-        uInsert.setPhoneNumber("010-1111-2222");
+uInsert.setName("정승원");
+uInsert.setAge("25");
+uInsert.setPhoneNumber("010-1111-2222");
 
-        mUserDao.setInsertUser(uInsert);
+mUserDao.setInsertUser(uInsert);
 ```
 
 <p>수정</p>
 
 ```java
 //데이터 수정
-        User uUpdate = new User();
-        uUpdate.setId(1); //바꾸고 싶은 id 지정
-        uUpdate.setName("정유설");
-        uUpdate.setAge("24");
-        uUpdate.setPhoneNumber("010-1111-0000");
+User uUpdate = new User();
+uUpdate.setId(1); //바꾸고 싶은 id 지정
+uUpdate.setName("정유설");
+uUpdate.setAge("24");
+uUpdate.setPhoneNumber("010-1111-0000");
 
-        mUserDao.setUpdateUser(uUpdate);
+mUserDao.setUpdateUser(uUpdate);
 ```
 
 <p>삭제</p>
 
 ```java
 User uDelete = new User();
-        uDelete.setId(1);
-        mUserDao.setDeleteUser(uDelete);
+uDelete.setId(1);
+mUserDao.setDeleteUser(uDelete);
 ```
 
 <p>조회</p>
 
 ```java
 //User에 있는 List를 가져오는 것
-        List<User> userList = mUserDao.getUserAll();
-        //i는 id의 값
-        for (int i = 0; i < userList.size(); i++){
-            Log.d("Test", userList.get(i).getName() + " "
-            +userList.get(i).getPhoneNumber());
-        }
-        Log.d("test", userList.get(1).getName()+"");
+List<User> userList = mUserDao.getUserAll();
+//i는 id의 값
+for (int i = 0; i < userList.size(); i++){
+        Log.d("Test", userList.get(i).getName() + " "
+        +userList.get(i).getPhoneNumber());
+}
+Log.d("test", userList.get(1).getName()+"");
 ```
