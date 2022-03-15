@@ -123,7 +123,7 @@ name.setText(getName + "님 환영합니다.");
 implementation 'androidx.room:room-runtime:2.3.0'
 ```
 
-<p>만약 빌드 시 에러가 난다면 다음 <p color="red">implementation 위치에 annotationProcessor 'androidx.room:room-compiler:2.3.0'</p> 추가</p>
+<p>만약 빌드 시 에러가 난다면 다음 implementation 위치에 annotationProcessor 'androidx.room:room-compiler:2.3.0'추가</p>
 
 - User에 대한 정보를 get, set하는 class
 
