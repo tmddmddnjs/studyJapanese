@@ -25,9 +25,11 @@ import com.example.studyjapanese.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class SignUpActivity extends AppCompatActivity {
     private EditText signUp_userId, signUp_userPass, signUp_userName, signUp_userAge;
-    private Button signUp_btn_register;
+    private Button signUp_btn_register, allDelete;
 
     //ROOM이용
     private UserDao mUserDao;
@@ -86,11 +88,35 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
+                //중복확인
+                List<User> userList = mUserDao.getUserAll();
+                for (int i = 0; i < userList.size(); i++){
+                    String checkId = userList.get(i).getUserId() + "";
+                    if(checkId.equals(id + "")){
+                        Toast.makeText(SignUpActivity.this,"아이디가 중복되었습니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                //중복이 없을 시 db에 데이터를 insert
                 uInsert.setUserId(id);
                 uInsert.setUserPass(pass);
                 uInsert.setUserName(name);
                 uInsert.setUserAge(age);
+
+                Toast.makeText(SignUpActivity.this,"회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+
                 mUserDao.setInsertUser(uInsert);
+
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        allDelete = (Button)findViewById(R.id.allDelete);
+        allDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mUserDao.deleteAll();
             }
         });
     }
