@@ -581,8 +581,8 @@ lyricsFragment.setArguments(result);
 //fragment간 데이터 교환(받는 쪽)
 Bundle result = getArguments();
 if(result != null){
-        test = result.getString("test");
-        testView.setText(test+"");
+        musicFragment_musicName = result.getString("musicName");
+        lyricsMusicName.setText("노래명 : " + musicFragment_musicName);
 }
 ```
 
