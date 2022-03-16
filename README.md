@@ -540,11 +540,17 @@ public void onClick(View v) {
 <h2>RecyclerView에서 특정 item의 position값이 아닌 이름을 가져오고 싶을 때</h2>
 
 - RecyclerView에서 item값 가져오기
-- Fragment간 데이터 교환을 위한 Bundle
 - 다른 fragment로 이동할 때
 
-<p>musicFragment에서 RecyclerView의 item값을 가져오는 경우 및 클릭시 다른 fragment로 이동하고 싶은 경우</p>
+<p>먼저 musicAdapter에서 MusicRecyclerViewItem에서 position의 item값을 가져오기 위해 다음과 같이 추가</p>
 
+```java
+public MusicRecyclerViewItem getItem(int position){
+        return list.get(position);
+}
+```
+
+<p>그 후 musicFragment에서 RecyclerView의 item값 가져오기 위해서 위의 getItem을 이용하고 및 클릭시 다른 fragment로 이동하고 싶은 경우</p>
 
 ```java
 //recyclerView click event
@@ -555,20 +561,25 @@ public void onItemClick(View v, int pos) {
         MusicRecyclerViewItem item = musicAdapter.getItem(pos);
         Toast.makeText(getContext(),item.getSub()+"", Toast.LENGTH_SHORT).show();
                 
-        //framgent간 데이터 교환(보내는 쪽)
-        Bundle result = new Bundle();
-        result.putString("test", "정승원");
-        lyricsFragment.setArguments(result);
-        
-        //fragment간 데이터 교환(받는 쪽)
-        Bundle result = getArguments();
-        if(result != null){
-            test = result.getString("test");
-            testView.setText(test+"");
-        }
-                
         //리사이클 뷰의 특정 아이템 클릭시 lyricsFragment로 이동
         getFragmentManager().beginTransaction().replace(R.id.container, lyricsFragment).commit();
         }
 });
 ```
+
+<h2>Fragment 간 데이터 교환 Bundle</h2>
+
+```java     
+//framgent간 데이터 교환(보내는 쪽)
+Bundle result = new Bundle();
+result.putString("test", "정승원");
+lyricsFragment.setArguments(result);
+        
+//fragment간 데이터 교환(받는 쪽)
+Bundle result = getArguments();
+if(result != null){
+        test = result.getString("test");
+        testView.setText(test+"");
+}
+```
+
