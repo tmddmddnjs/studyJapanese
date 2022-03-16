@@ -551,6 +551,7 @@ public MusicRecyclerViewItem getItem(int position){
 ```
 
 <p>그 후 musicFragment에서 RecyclerView의 item값 가져오기 위해서 위의 getItem을 이용하고 및 클릭시 다른 fragment로 이동하고 싶은 경우</p>
+<p>여기서는 item.getSub()의 이름을 가져온다</p>
 
 ```java
 //recyclerView click event
@@ -558,8 +559,10 @@ lyricsFragment = new LyricsFragment();
 musicAdapter.setOnItemClickListener(new musicAdapter.OnItemClickListener() {
 @Override
 public void onItemClick(View v, int pos) {
+        //musicAdapter에서 getItem을 통해 MusicRecyclerViewItem에 있는 getSub()로 sub이름인 노래명을 가져온다.
+        //MusicRecyclerViewItem의 getSub()에는 position의 노래명이 들어가 있음
         MusicRecyclerViewItem item = musicAdapter.getItem(pos);
-        Toast.makeText(getContext(),item.getSub()+"", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), item.getSub()+"", Toast.LENGTH_SHORT).show();
                 
         //리사이클 뷰의 특정 아이템 클릭시 lyricsFragment로 이동
         getFragmentManager().beginTransaction().replace(R.id.container, lyricsFragment).commit();
