@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String getName = intent.getExtras().getString("이름");
 
+        //activity_main에 있는 before_after_login화면서 after_login.xml을 넣는다.
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.after_login, before_after_login, true);
         //로그인시 받아온 유저 이름으로 넣기

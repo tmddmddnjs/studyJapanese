@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.SettingFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="settingFragment" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/inputMusicData"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="음악 데이터 입력"
+            android:textColor="@color/black"
+            app:backgroundTint="#FFFFFF" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#989898" />
+
+        <Button
+            android:id="@+id/inputLyricsData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="가사 데이터 입력"
+            android:textColor="@color/black"
+            app:backgroundTint="#FFFFFF" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#989898" />
+
+    </LinearLayout>
 
 </FrameLayout>

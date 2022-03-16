@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyJapanese"
         android:usesCleartextTraffic="true">
-        <activity android:name=".insertActivity">
+        <activity android:name=".insertLyricsActivity">
+
+        </activity>
+        <activity android:name=".insertMusicActivity">
 
         </activity>
         <activity android:name=".loginInfo.SignUpActivity" />
@@ -23,9 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

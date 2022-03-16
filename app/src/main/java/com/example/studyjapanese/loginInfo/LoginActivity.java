@@ -49,6 +49,11 @@ public class LoginActivity extends AppCompatActivity {
 
         this.Init();
 
+        //set
+        login_userId.setText("wjdtmddnjs");
+        login_userPass.setText("123");
+
+
         //UserDatabase를 이용한 db생성인데 tmddmddnjs_db는 table이름.
         UserDatabase database = Room.databaseBuilder(getApplicationContext(), UserDatabase.class, "tmddmddnjs_db")
                 .fallbackToDestructiveMigration()   //스키마 버전 변경 가능

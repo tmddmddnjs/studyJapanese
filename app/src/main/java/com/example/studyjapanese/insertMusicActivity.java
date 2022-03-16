@@ -6,15 +6,13 @@ import androidx.room.Room;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.example.studyjapanese.Database.User;
-import com.example.studyjapanese.Database.UserDao;
-import com.example.studyjapanese.Database.UserDatabase;
 import com.example.studyjapanese.musicDB.music;
 import com.example.studyjapanese.musicDB.musicDao;
 import com.example.studyjapanese.musicDB.musicDatabase;
 
-public class insertActivity extends AppCompatActivity {
+public class insertMusicActivity extends AppCompatActivity {
     private musicDao mmusicDao;
 
     Button allDeleteButton, allInsertButton;
@@ -22,7 +20,7 @@ public class insertActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insert);
+        setContentView(R.layout.activity_insert_music);
 
         musicDatabase database = Room.databaseBuilder(getApplicationContext(), musicDatabase.class, "music_db")
                 .fallbackToDestructiveMigration()   //스키마 버전 변경 가능
@@ -37,6 +35,7 @@ public class insertActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mmusicDao.deleteAll();
+                Toast.makeText(insertMusicActivity.this, "노래 삭제 완료", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,12 +86,14 @@ public class insertActivity extends AppCompatActivity {
                 mmusicDao.setInsertmusic(uInsert);
 
                 uInsert.setArtistName("花たん");
-                uInsert.setMusicName("夜明けと蛍 ");
+                uInsert.setMusicName("夜明けと蛍");
                 mmusicDao.setInsertmusic(uInsert);
 
                 uInsert.setArtistName("花たん");
-                uInsert.setMusicName("心做し ");
+                uInsert.setMusicName("心做し");
                 mmusicDao.setInsertmusic(uInsert);
+
+                Toast.makeText(insertMusicActivity.this, "노래 입력 완료", Toast.LENGTH_SHORT).show();
             }
         });
     }
