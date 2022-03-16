@@ -383,6 +383,7 @@ public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicHolder>
         list = data;
     }
 
+    //inflater를 통해 1에서 설정한 music_recyclerview_item_list.xml을 가져와 musicAdapter holder 설정
     @NonNull
     @Override
     public musicHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -394,6 +395,7 @@ public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicHolder>
         return mh;
     }
 
+    //해당 position에 있는 값들을 get해서 item_list_textView에 setText한다
     @Override
     public void onBindViewHolder(@NonNull musicHolder holder, int position) {
         MusicRecyclerViewItem item = list.get(position);
@@ -401,6 +403,7 @@ public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicHolder>
         holder.item_list_textView2.setText(item.getSub());
     }
 
+    //실제 list의 길이만큼 return 받는다
     @Override
     public int getItemCount() {
         return list.size();
