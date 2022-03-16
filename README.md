@@ -575,7 +575,7 @@ public void onItemClick(View v, int pos) {
 ```java     
 //framgent간 데이터 교환(보내는 쪽)
 Bundle result = new Bundle();
-result.putString("test", "정승원");
+result.putString("musicName", item.getSub()+"");
 lyricsFragment.setArguments(result);
         
 //fragment간 데이터 교환(받는 쪽)
