@@ -469,3 +469,14 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
         list.add(item);
     }
 ```
+
+- 리사이클 뷰에 보여지는 db 속 내용
+
+![실제 db내용](https://user-images.githubusercontent.com/71477375/158541455-672c6337-36af-4128-9af4-c56c95fb427b.PNG)
+
+- 실제 화면 상에 보이는 리사이클 뷰
+
+<p>artistName이 main이고, 아래에 musicName이 sub이다.</p>
+
+![노래](https://user-images.githubusercontent.com/71477375/158541453-a77e496d-67a4-4f3b-b3de-c4a65fad1794.PNG)
+
