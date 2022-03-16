@@ -601,3 +601,13 @@ for (int i = 0; i < lyricsist.size(); i++) {
         }
 }
 ```
+
+- recyclerView에 있는 item을 클릭하면 해당 item을 가져와서 넘긴다.
+
+![노래제목](https://user-images.githubusercontent.com/71477375/158579939-3fbe1043-85cc-4add-b1f7-f85e1b0bbd49.PNG)
+
+- musicFragment에서 받은 musicName과 일치하는 음악 이름의 가사를 나타낸다.
+
+![클릭시](https://user-images.githubusercontent.com/71477375/158579934-6fee1558-9823-4fbb-b6e5-f0dd2b763aab.PNG)
+
+
