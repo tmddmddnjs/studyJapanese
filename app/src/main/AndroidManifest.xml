@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyJapanese"
         android:usesCleartextTraffic="true">
-        <activity android:name=".loginInfo.SignUpActivity"></activity>
-        <activity android:name=".loginInfo.LoginActivity" >
+        <activity android:name=".insertActivity">
+
+        </activity>
+        <activity android:name=".loginInfo.SignUpActivity" />
+        <activity android:name=".loginInfo.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

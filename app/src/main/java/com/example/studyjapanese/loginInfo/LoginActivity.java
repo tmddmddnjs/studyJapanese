@@ -34,8 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     private UserDao mUserDao;
     private String id, pass, putName;
 
-    private boolean check = false;
-
     public void Init(){
         login_userId = findViewById(R.id.login_userId);
         login_userPass = findViewById(R.id.login_userPass);
@@ -66,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("login", "로그인 버튼");
 
+                boolean check = false;
                 id = login_userId.getText().toString();
                 pass = login_userPass.getText().toString();
 

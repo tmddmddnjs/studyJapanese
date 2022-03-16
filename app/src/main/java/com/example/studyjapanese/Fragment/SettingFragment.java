@@ -13,6 +13,8 @@ import com.example.studyjapanese.R;
 
 public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_setting, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
+
+        return rootView;
     }
 }
