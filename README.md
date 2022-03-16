@@ -123,7 +123,7 @@ name.setText(getName + "님 환영합니다.");
 implementation 'androidx.room:room-runtime:2.3.0'
 ```
 
-<p>만약 빌드 시 에러가 난다면 다음 implementation 위치에 annotationProcessor 'androidx.room:room-compiler:2.3.0' 추가</p>
+<p>만약 빌드 시 에러가 난다면 다음 implementation 위치에 annotationProcessor 'androidx.room:room-compiler:2.3.0'추가</p>
 
 - User에 대한 정보를 get, set하는 class
 
@@ -307,3 +307,179 @@ startActivity(intent);
 Intent intent = getIntent();
 String getName = intent.getExtras().getString("이름");
 ```
+
+<h2>musicFragment에 DB에 있는 아티스트명, 음악명을 RecyclerView로 나타내기</h2>
+
+- RecyclerView 생성 방법
+
+<p><b>1. music_recyclerview_item-list.xml이라는 실제 화면에 보여질 xml을 만든다.</b></P>
+
+```java
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/item_list_textView1"/>
+
+    <TextView
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/item_list_textView2"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000"/>
+
+
+</LinearLayout>
+```
+
+<p><b>2. musicFragment.xml에 RecyclerView생성</b></p>
+
+<p><b>3. MusicRecyclerViewitem.java를 생성한다</b></p>
+<p>1에서 생성한 textView 2개에 넣을 데이터를 만든다. get, set을 이용해 데이터 교환 </p>
+
+```java
+public class MusicRecyclerViewItem {
+    private String main;
+    private String sub;
+
+    public String getMain() {
+        return main;
+    }
+
+    public void setMain(String main) {
+        this.main = main;
+    }
+
+    public String getSub() {
+        return sub;
+    }
+
+    public void setSub(String sub) {
+        this.sub = sub;
+    }
+}
+```
+
+<p><b>4. musicAdapter.java를 생성한다</b></p>
+<p>viewholder를 사용하여 1의 xml의 view를 가져와서 아이템 뷰를 저장한다</p> 
+
+```java
+public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicHolder> {
+    ArrayList<MusicRecyclerViewItem> list;
+
+    public musicAdapter(ArrayList<MusicRecyclerViewItem> data){
+        list = data;
+    }
+
+    //inflater를 통해 1에서 설정한 music_recyclerview_item_list.xml을 가져와 musicAdapter holder 설정
+    @NonNull
+    @Override
+    public musicHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context =parent.getContext();
+        LayoutInflater inflater = (LayoutInflater)
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.music_recyclerview_item_list, parent, false);
+        musicAdapter.musicHolder mh = new musicAdapter.musicHolder(view);
+        return mh;
+    }
+
+    //해당 position에 있는 값들을 get해서 item_list_textView에 setText한다
+    @Override
+    public void onBindViewHolder(@NonNull musicHolder holder, int position) {
+        MusicRecyclerViewItem item = list.get(position);
+        holder.item_list_textView1.setText(item.getMain());
+        holder.item_list_textView2.setText(item.getSub());
+    }
+
+    //실제 list의 길이만큼 return 받는다
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    //아이템 뷰를 저장하는 뷰홀더 클래스스
+   class musicHolder extends RecyclerView.ViewHolder{
+        TextView item_list_textView1;
+        TextView item_list_textView2;
+        public musicHolder(@NonNull View itemView) {
+            super(itemView);
+            item_list_textView1 = itemView.findViewById(R.id.item_list_textView1);
+            item_list_textView2 = itemView.findViewById(R.id.item_list_textView2);
+        }
+    }
+}
+```
+
+<p><b>5. musicFragment에서 데이터를 집어넣는다.</b></p>
+<p>music.db에 있는 데이터들을 각각 main과 sub에 집어 넣는다.</p>
+ 
+```java
+//리스트 뷰 사용하기
+RecyclerView mRecyclerView;
+musicAdapter musicAdapter;
+ArrayList<MusicRecyclerViewItem> list;
+String artistName, musicName;
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_music, container, false);
+
+        //RecyclerView 생성
+        mRecyclerView = rootView.findViewById(R.id.music_recyclerView);
+        list = new ArrayList<>();
+
+        musicAdapter = new musicAdapter(list);
+        mRecyclerView.setAdapter(musicAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+
+        //musicDB사용
+        musicDatabase database = Room.databaseBuilder(rootView.getContext(), musicDatabase.class, "music_db")
+                .fallbackToDestructiveMigration()   //스키마 버전 변경 가능
+                .allowMainThreadQueries()           //메인 스레드에서 DB에 IO를 가능하게 함
+                .build();
+
+        mmusicDao = database.musicDao();
+
+        //musicdb의 내용 이름들을 가져와서
+        List<music> musicList = mmusicDao.getmusicAll();
+        for(int i = 0; i<musicList.size(); i++) {
+            artistName = musicList.get(i).getArtistName() + "";
+            musicName = musicList.get(i).getMusicName() + "";
+            //munuItems에 넣은 뒤 list에 넣는다
+            addItem(artistName, musicName);
+        }
+
+        musicAdapter.notifyDataSetChanged();
+
+        return rootView;
+    }
+    private void addItem(String main, String sub){
+        MusicRecyclerViewItem item = new MusicRecyclerViewItem();
+        item.setMain(main);
+        item.setSub(sub);
+
+        list.add(item);
+    }
+```
+
+- 리사이클 뷰에 보여지는 db 속 내용
+
+![실제 db내용](https://user-images.githubusercontent.com/71477375/158541455-672c6337-36af-4128-9af4-c56c95fb427b.PNG)
+
+- 실제 화면 상에 보이는 리사이클 뷰
+
+<p>artistName이 main이고, 아래에 musicName이 sub이다.</p>
+
+![노래](https://user-images.githubusercontent.com/71477375/158541453-a77e496d-67a4-4f3b-b3de-c4a65fad1794.PNG)
+
