@@ -485,3 +485,90 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
 
 ![노래](https://user-images.githubusercontent.com/71477375/158541453-a77e496d-67a4-4f3b-b3de-c4a65fad1794.PNG)
 
+<h2>RecyclerView의 click event를 다른 액티비티나 프래그먼트에서 실행하기</h2>
+
+<p>musicAdapter에서 musicHolder아래에 다음과 같이 추가</p>
+
+```java
+//다른 액티비티나 프래그먼트에서 리사이클 뷰를 클릭했을 시 이벤트 발생
+itemView.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+        int pos = getAdapterPosition();
+        if (pos != RecyclerView.NO_POSITION) {
+                //다른 액티비티나 프래그먼트에서 실행하기 위해 onItemClick를 호출한다
+                mListener.onItemClick(v, pos);
+                }
+        }
+});
+```
+
+<p>추가로 제일 똑같이 musicAdapter아래에 OnItemClickListener, 변수, setOnItemClickListener 추가</p>
+
+```java
+public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicHolder> {
+//다른 액티비티나 프래그먼트에서 리사이클 뷰를 클릭했을 시 이벤트 발생
+    public interface OnItemClickListener{
+        void onItemClick(View v, int pos);
+    }
+    // 리스너 객체 참조를 저장하는 변수
+    private OnItemClickListener mListener = null;
+
+    // OnItemClickListener 객체 참조를 어댑터에 전달하는 메서드
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
+        this.mListener = listener;
+    }
+}
+```
+
+- 만약 그냥 그 페이지에서만 버튼 이벤트를 만들고 싶으면
+
+```java
+//다른 액티비티나 프래그먼트에서 리사이클 뷰를 클릭했을 시 이벤트 발생
+itemView.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+        int pos = getAdapterPosition();
+        if (pos != RecyclerView.NO_POSITION) {
+                //여기에 그냥 그대로 사용하면 된다.
+                }
+        }
+});
+```
+
+<h2>RecyclerView에서 특정 item의 position값이 아닌 이름을 가져오고 싶을 때</h2>
+
+- RecyclerView에서 item값 가져오기
+- Fragment간 데이터 교환을 위한 Bundle
+- 다른 fragment로 이동할 때
+
+<p>musicFragment에서 RecyclerView의 item값을 가져오는 경우 및 클릭시 다른 fragment로 이동하고 싶은 경우</p>
+
+
+```java
+//recyclerView click event
+lyricsFragment = new LyricsFragment();
+musicAdapter.setOnItemClickListener(new musicAdapter.OnItemClickListener() {
+@Override
+public void onItemClick(View v, int pos) {
+        MusicRecyclerViewItem item = musicAdapter.getItem(pos);
+        Toast.makeText(getContext(),item.getSub()+"", Toast.LENGTH_SHORT).show();
+                
+        //framgent간 데이터 교환(보내는 쪽)
+        Bundle result = new Bundle();
+        result.putString("test", "정승원");
+        lyricsFragment.setArguments(result);
+        
+        //fragment간 데이터 교환(받는 쪽)
+        Bundle result = getArguments();
+        if(result != null){
+            test = result.getString("test");
+            testView.setText(test+"");
+        }
+                
+        //리사이클 뷰의 특정 아이템 클릭시 lyricsFragment로 이동
+        getFragmentManager().beginTransaction().replace(R.id.container, lyricsFragment).commit();
+        }
+});
+```
