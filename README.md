@@ -55,7 +55,9 @@ create github
 public class MusicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //R.layout.X는 해당하는 Fragment의 xml의 이름을 가져오는 것
-        return inflater.inflate(R.layout.fragment_music, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_music, container, false);
+
+        return rootView;
     }
 }
 ```
