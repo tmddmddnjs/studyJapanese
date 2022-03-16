@@ -312,7 +312,7 @@ String getName = intent.getExtras().getString("이름");
 
 - RecyclerView 생성 방법
 
-<p>1. music_recyclerview_item-list.xml이라는 실제 화면에 보여질 xml을 만든다.</P>
+<p><b>1. music_recyclerview_item-list.xml이라는 실제 화면에 보여질 xml을 만든다.</b></P>
 
 ```java
 <?xml version="1.0" encoding="utf-8"?>
@@ -344,9 +344,9 @@ String getName = intent.getExtras().getString("이름");
 </LinearLayout>
 ```
 
-<p>2. musicFragment.xml에 RecyclerView생성</p>
+<p><b>2. musicFragment.xml에 RecyclerView생성</b></p>
 
-<p>3. MusicRecyclerViewitem.java를 생성한다</p>
+<p><b>3. MusicRecyclerViewitem.java를 생성한다</b></p>
 <p>1에서 생성한 textView 2개에 넣을 데이터를 만든다. get, set을 이용해 데이터 교환 </p>
 
 ```java
@@ -372,7 +372,7 @@ public class MusicRecyclerViewItem {
 }
 ```
 
-<p>4. musicAdapter.java를 생성한다</p>
+<p><b>4. musicAdapter.java를 생성한다</b></p>
 <p>viewholder를 사용하여 1의 xml의 view를 가져와서 아이템 뷰를 저장한다</p> 
 
 ```java
@@ -419,7 +419,7 @@ public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicHolder>
 }
 ```
 
-<p>5. musicFragment에서 데이터를 집어넣는다</p>
+<p><b>5. musicFragment에서 데이터를 집어넣는다.</b></p>
 <p>music.db에 있는 데이터들을 각각 main과 sub에 집어 넣는다.</p>
  
 ```java
