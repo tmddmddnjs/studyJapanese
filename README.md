@@ -586,3 +586,18 @@ if(result != null){
 }
 ```
 
+<h2>Lirics에서 가사 나타내기</h2>
+
+<p>musicFragment에서 받은 musicFragment_musicName과 lyricsFragment에서 for문으로 db를 보고 같은 이름의 음악명이 있으면 해당 명의 가사를 나타낸다.</p>
+
+```java     
+List<lyrics> lyricsist = mlyricsDao.getlyricsAll();
+for (int i = 0; i < lyricsist.size(); i++) {
+        musicName = lyricsist.get(i).getMusicName()+"";
+        //bundle로 받아온 musicFragment_musicName lyrics.db의 musicName이 같으면
+        //lyrics.db의 해당 lyrics을 가져옴.
+        if(musicName.equals(musicFragment_musicName)){
+                lyricsText.setText(lyricsist.get(i).getMusicLyrics() + "");
+        }
+}
+```
