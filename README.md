@@ -614,6 +614,8 @@ for (int i = 0; i < lyricsist.size(); i++) {
 
 - 다음의 그림의 LyricsFragment의 "단어추가하기" 버튼을 클릭 시 만들어 놓은 MyAlterDialog를 가져온다.
 
+![1](https://user-images.githubusercontent.com/71477375/159693929-737b263d-84d0-4af8-ab71-0fa1f6b92ab7.PNG)
+
 ```java     
 lyricsAddButton.setOnClickListener(new View.OnClickListener() {
         Override
@@ -623,9 +625,9 @@ lyricsAddButton.setOnClickListener(new View.OnClickListener() {
 });
 ```
 
-- dialog.xml 소스
+- customDialog의 xml (plus_word.xml)
 
-
+![2](https://user-images.githubusercontent.com/71477375/159693935-1ea83141-5c80-4ab8-abda-a54c9b59801e.PNG)
 
 - MyAlterDialog 소스
 
