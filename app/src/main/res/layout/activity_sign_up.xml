@@ -64,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="회원가입"
+        app:backgroundTint="#D18CA3"
         app:layout_constraintEnd_toEndOf="@+id/signUp_userAge"
         app:layout_constraintStart_toStartOf="@+id/signUp_userAge"
         app:layout_constraintTop_toBottomOf="@+id/signUp_userAge" />
@@ -74,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="다 삭제"
+        app:backgroundTint="#D18CA3"
         app:layout_constraintEnd_toEndOf="@+id/signUp_btn_register"
         app:layout_constraintStart_toStartOf="@+id/signUp_btn_register"
         app:layout_constraintTop_toBottomOf="@+id/signUp_btn_register" />

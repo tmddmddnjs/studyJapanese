@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.LyricsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:id="@+id/lyricsMusicName"
@@ -23,9 +27,12 @@
         <ScrollView
             android:id="@+id/lyricsScrollView"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
+            android:layout_below="@id/lyricsMusicName"
+            android:layout_above="@id/lyricsLinearButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -33,9 +40,11 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:textSize="20dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="20dp"
+                    android:textSize="20dp"
                     android:id="@+id/lyricsText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -45,6 +54,28 @@
 
         </ScrollView>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/lyricsLinearButton"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/lyricsAddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="단어추가하기"
+                app:backgroundTint="#D18CA3" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>

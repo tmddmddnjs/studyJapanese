@@ -39,6 +39,19 @@
             android:layout_height="2dp"
             android:background="#989898" />
 
+        <Button
+            android:id="@+id/inputWordData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="단어 데이터 삭제"
+            android:textColor="@color/black"
+            app:backgroundTint="#FFFFFF" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#989898" />
+
     </LinearLayout>
 
 </FrameLayout>

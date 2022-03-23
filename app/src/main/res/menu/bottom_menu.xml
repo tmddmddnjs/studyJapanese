@@ -17,15 +17,13 @@
         android:id="@+id/third_tab"
         app:showAsAction="always"
         android:enabled="true"
-        android:title="lookup">
-    </item>
+        android:title="lookup"/>
 
     <item
         android:id="@+id/fourth_tab"
         app:showAsAction="always"
         android:enabled="true"
-        android:title="study">
-    </item>
+        android:title="study"/>
 
     <item
         android:id="@+id/fifth_tab"
