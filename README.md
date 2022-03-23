@@ -610,4 +610,63 @@ for (int i = 0; i < lyricsist.size(); i++) {
 
 ![클릭시](https://user-images.githubusercontent.com/71477375/158579934-6fee1558-9823-4fbb-b6e5-f0dd2b763aab.PNG)
 
+<h2>AlertDialog생성</h2>
 
+- 다음의 그림의 LyricsFragment의 "단어추가하기" 버튼을 클릭 시 만들어 놓은 MyAlterDialog를 가져온다.
+
+```java     
+lyricsAddButton.setOnClickListener(new View.OnClickListener() {
+        Override
+        public void onClick(View v) {
+                MyAlterDialog();
+        }
+});
+```
+
+- dialog.xml 소스
+
+
+
+- MyAlterDialog 소스
+
+```java     
+public void MyAlterDialog(){
+        AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        View view = inflater.inflate(R.layout.plus_word, null);
+
+        //inflater로 plus_word.xml을 불러옴
+        ad.setView(view)
+                .setPositiveButton("추가", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        //입력 받은 데이터는 Word.db에 저장
+                        EditText plusWordAddWord = (EditText)view.findViewById(R.id.plusWordAddWord);
+                        EditText plusWordAddMean = (EditText)view.findViewById(R.id.plusWordAddMean);
+
+                        //텍스트 받아와서
+                        String AddWord = plusWordAddWord.getText().toString();
+                        String AddMean = plusWordAddMean.getText().toString();
+
+                        //Word.db에 다이어로그에 입력되었던 단어를 insert
+                        Word uInsert = new Word();
+                        uInsert.setWordWord(AddWord + "");
+                        uInsert.setWordMean(AddMean + "");
+                        mWordDao.setInsertWord(uInsert);
+
+                        dialog.dismiss();
+
+                        Toast.makeText(getContext(),"단어가 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        //취소 버튼 클릭 시 아무것도 안함
+                        dialog.dismiss();
+                        }
+                });
+        ad.show();
+}
+```
