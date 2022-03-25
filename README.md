@@ -773,8 +773,6 @@ public class StudyFragment extends Fragment {
 
 - Next버튼을 누르면 다음 단어가 보이도록 설정하였다.
 
-<p>범위를 초과하게 되면 꺼지기 때문에 try로 범위가 초과하면 돌아오도록 만들었다.</p>
-
 ```java     
 private void buttonNextPrev() {
         studyNext.setOnClickListener(new View.OnClickListener() {
@@ -795,6 +793,7 @@ private void buttonNextPrev() {
                                                 .start();
                                         viewClickCheck = true;
                                     }
+                                    //DB 범위 초과 시 돌아오도록
                                     catch (Exception e){
                                         i--;
                                         clickTextView.setText("단어 : " + wordList.get(i).getWordWord() + "");
@@ -814,9 +813,11 @@ private void buttonNextPrev() {
         });
 ```
 
-<p>기존의 화면에서 Next를 눌렀을 </p>
+- 기존의 화면에서 Next를 눌렀을 시
 
 ![2](https://user-images.githubusercontent.com/71477375/160124916-f60e899c-7833-4f4d-9baf-a4f738edcdbd.PNG)
-
 ![3](https://user-images.githubusercontent.com/71477375/160124917-6a59e7bf-3383-465f-972b-6b5279f55bec.PNG)
 
+- 데이터베이스의 범위 초과 시
+
+![4](https://user-images.githubusercontent.com/71477375/160125744-e95f17ac-fabc-4044-b03d-7385336a0f0b.PNG)
