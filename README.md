@@ -672,3 +672,155 @@ public void MyAlterDialog(){
         ad.show();
 }
 ```
+
+<h2>TextView 클릭으로 뒤집기</h2>
+
+- fragment_study.xml에 include layout을 만들어서 다른 xml을 올려놓는다.
+
+```java     
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.StudyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/card_view" />
+
+    </LinearLayout>
+
+</FrameLayout>
+```
+
+- include에 넣을 xml인 card_view를 만들어준다.(그림은 card_view를 include layout에 넣었을 때)
+
+![앞](https://user-images.githubusercontent.com/71477375/160102041-719bb2f2-8328-4dcc-a550-631eda93a775.PNG)
+
+```java     
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content">
+
+        <TextView
+        android:id="@+id/cardTextView"
+        android:layout_width="120dp"
+        android:layout_height="200dp"
+        android:background="@color/design_default_color_secondary"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+        
+</LinearLayout>
+```
+
+- StudyFragment.java소스 (클릭마다 앞, 뒤가 바뀐다.)
+
+![앞](https://user-images.githubusercontent.com/71477375/160102041-719bb2f2-8328-4dcc-a550-631eda93a775.PNG)
+![뒤](https://user-images.githubusercontent.com/71477375/160102044-a79efd14-11ff-40c3-b6ac-d42cd17fa7c5.PNG)
+
+```java     
+public class StudyFragment extends Fragment {
+    //textView 뒤집기
+    private TextView clickTextView;
+    private boolean viewClickCheck;
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_study, container, false);
+
+        //inclue layout의 textView 뒤집기
+        clickTextView = rootView.findViewById(R.id.cardTextView);
+        clickTextView.setOnClickListener(new View.OnClickListener() {
+            //텍스트를 누르면 Y축 90식 회전을 시키는데
+            @Override
+            public void onClick(View v) {
+                clickTextView.animate().withLayer()
+                        .rotationY(90) //Y축 회전
+                        .setDuration(150) //시간
+                        .withEndAction(new Runnable() {
+                            //반복해서 누를 때 마다 스레드로 계속해서 바꿔주는 것
+                            @Override
+                            public void run() {
+                                //앞
+                                if (!viewClickCheck) {
+                                    clickTextView.setText("여기는 앞!!");
+                                    viewClickCheck = true;
+                                }
+                                //뒤
+                                else {
+                                    clickTextView.setText("여기는 뒤!!");
+                                    viewClickCheck = false;
+                                }
+                                clickTextView.setRotationY(-90); //Y축 복구
+                                clickTextView.animate().withLayer()
+                                        .rotationY(0)
+                                        .setDuration(250) //시간
+                                        .start();
+                            }
+                        }).start();
+            }
+        });
+
+        return rootView;
+    }
+}
+```
+
+
+- Next버튼을 누르면 다음 단어가 보이도록 설정하였다.
+
+```java     
+private void buttonNextPrev() {
+        studyNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    clickTextView.animate().withLayer()
+                            .rotationY(90)
+                            .setDuration(150) //시간
+                            .withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        clickTextView.setText("단어 : " + wordList.get(i).getWordWord() + "");
+                                        clickTextView.setRotationY(-90);
+                                        clickTextView.animate().withLayer()
+                                                .rotationY(0)
+                                                .setDuration(250)
+                                                .start();
+                                        viewClickCheck = true;
+                                    }
+                                    //DB 범위 초과 시 돌아오도록
+                                    catch (Exception e){
+                                        i--;
+                                        clickTextView.setText("단어 : " + wordList.get(i).getWordWord() + "");
+                                        clickTextView.setRotationY(-90);
+                                        clickTextView.animate().withLayer()
+                                                .rotationY(0)
+                                                .setDuration(250)
+                                                .start();
+                                        viewClickCheck = true;
+                                        Toast.makeText(getContext(), "마지막 페이지.", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            }).start();
+                    i++;
+            }
+        });
+```
+
+
+- 기존의 화면에서 Next를 눌렀을 시
+
+![3](https://user-images.githubusercontent.com/71477375/160124917-6a59e7bf-3383-465f-972b-6b5279f55bec.PNG)
+![1](https://user-images.githubusercontent.com/71477375/160126268-1dd08390-7327-400f-9efd-4151ed08ec06.PNG)
+
+
+- 데이터베이스의 범위 초과 시
+
+![4](https://user-images.githubusercontent.com/71477375/160125744-e95f17ac-fabc-4044-b03d-7385336a0f0b.PNG)
