@@ -771,6 +771,7 @@ public class StudyFragment extends Fragment {
 }
 ```
 
+
 - Next버튼을 누르면 다음 단어가 보이도록 설정하였다.
 
 ```java     
@@ -813,10 +814,12 @@ private void buttonNextPrev() {
         });
 ```
 
+
 - 기존의 화면에서 Next를 눌렀을 시
 
-![2](https://user-images.githubusercontent.com/71477375/160124916-f60e899c-7833-4f4d-9baf-a4f738edcdbd.PNG)
 ![3](https://user-images.githubusercontent.com/71477375/160124917-6a59e7bf-3383-465f-972b-6b5279f55bec.PNG)
+![1](https://user-images.githubusercontent.com/71477375/160126268-1dd08390-7327-400f-9efd-4151ed08ec06.PNG)
+
 
 - 데이터베이스의 범위 초과 시
 
