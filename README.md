@@ -1,5 +1,10 @@
 # studyJapanese
 
+
+https://user-images.githubusercontent.com/71477375/160128671-bacfbc2f-b8c0-4007-bf2f-edd7c1ca8537.mp4
+
+
+
 <h2>first</h2>
 
 create github
