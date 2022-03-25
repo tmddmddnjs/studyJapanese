@@ -672,3 +672,47 @@ public void MyAlterDialog(){
         ad.show();
 }
 ```
+
+<h2>TextView 클릭으로 뒤집기</h2>
+
+- fragment_study.xml에 include layout을 만들어서 다른 xml을 올려놓는다.
+
+```java     
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.StudyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/card_view" />
+
+    </LinearLayout>
+
+</FrameLayout>
+```
+
+- include에 넣을 xml인 card_view를 만들어준다.
+
+```java     
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content">
+
+        <TextView
+        android:id="@+id/cardTextView"
+        android:layout_width="120dp"
+        android:layout_height="200dp"
+        android:background="@color/design_default_color_secondary"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+        
+</LinearLayout>
+```
