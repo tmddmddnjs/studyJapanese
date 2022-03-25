@@ -770,3 +770,53 @@ public class StudyFragment extends Fragment {
     }
 }
 ```
+
+- Next버튼을 누르면 다음 단어가 보이도록 설정하였다.
+
+<p>범위를 초과하게 되면 꺼지기 때문에 try로 범위가 초과하면 돌아오도록 만들었다.</p>
+
+```java     
+private void buttonNextPrev() {
+        studyNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    clickTextView.animate().withLayer()
+                            .rotationY(90)
+                            .setDuration(150) //시간
+                            .withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        clickTextView.setText("단어 : " + wordList.get(i).getWordWord() + "");
+                                        clickTextView.setRotationY(-90);
+                                        clickTextView.animate().withLayer()
+                                                .rotationY(0)
+                                                .setDuration(250)
+                                                .start();
+                                        viewClickCheck = true;
+                                    }
+                                    catch (Exception e){
+                                        i--;
+                                        clickTextView.setText("단어 : " + wordList.get(i).getWordWord() + "");
+                                        clickTextView.setRotationY(-90);
+                                        clickTextView.animate().withLayer()
+                                                .rotationY(0)
+                                                .setDuration(250)
+                                                .start();
+                                        viewClickCheck = true;
+                                        Toast.makeText(getContext(), "마지막 페이지.", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            }).start();
+                    i++;
+            }
+        });
+```
+
+<p>기존의 화면에서 Next를 눌렀을 </p>
+
+![2](https://user-images.githubusercontent.com/71477375/160124916-f60e899c-7833-4f4d-9baf-a4f738edcdbd.PNG)
+
+![3](https://user-images.githubusercontent.com/71477375/160124917-6a59e7bf-3383-465f-972b-6b5279f55bec.PNG)
+
