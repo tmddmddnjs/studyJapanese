@@ -16,6 +16,7 @@ import com.example.studyjapanese.MainActivity;
 import com.example.studyjapanese.R;
 import com.example.studyjapanese.insertLyricsActivity;
 import com.example.studyjapanese.insertMusicActivity;
+import com.example.studyjapanese.insertStudyActivity;
 import com.example.studyjapanese.lyricsDB.lyricsDatabase;
 import com.example.studyjapanese.wordDB.WordDao;
 import com.example.studyjapanese.wordDB.WordDatabase;
@@ -59,8 +60,8 @@ public class SettingFragment extends Fragment {
         inputWordData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWordDao.deleteAll();
-                Toast.makeText(getActivity(), "모든 단어 삭제 완료", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), insertStudyActivity.class);
+                startActivity(intent);
             }
         });
 

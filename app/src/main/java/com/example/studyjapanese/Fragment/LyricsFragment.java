@@ -115,22 +115,27 @@ public class LyricsFragment extends Fragment {
                 .setPositiveButton("추가", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        EditText plusWordAddWord = (EditText)view.findViewById(R.id.plusWordAddWord);
-                        EditText plusWordAddMean = (EditText)view.findViewById(R.id.plusWordAddMean);
+                        try {
+                            EditText plusWordAddWord = (EditText)view.findViewById(R.id.plusWordAddWord);
+                            EditText plusWordAddMean = (EditText)view.findViewById(R.id.plusWordAddMean);
 
-                        //텍스트 받아와서
-                        String AddWord = plusWordAddWord.getText().toString();
-                        String AddMean = plusWordAddMean.getText().toString();
+                            //텍스트 받아와서
+                            String AddWord = plusWordAddWord.getText().toString();
+                            String AddMean = plusWordAddMean.getText().toString();
+                            //Word.db에 다이어로그에 입력되었던 단어를 insert
+                            Word uInsert = new Word();
+                            uInsert.setWordWord(AddWord + "");
+                            uInsert.setWordMean(AddMean + "");
+                            mWordDao.setInsertWord(uInsert);
 
-                        //Word.db에 다이어로그에 입력되었던 단어를 insert
-                        Word uInsert = new Word();
-                        uInsert.setWordWord(AddWord + "");
-                        uInsert.setWordMean(AddMean + "");
-                        mWordDao.setInsertWord(uInsert);
+                            dialog.dismiss();
 
-                        dialog.dismiss();
-
-                        Toast.makeText(getContext(),"단어가 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        catch (Exception e){
+                            Toast.makeText(getContext(), "추가가 안되었습니다.", Toast.LENGTH_SHORT).show();
+                            Log.d("noInputData", e+"");
+                        }
                     }
                 })
                 .setNegativeButton("취소", new DialogInterface.OnClickListener() {
