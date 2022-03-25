@@ -719,7 +719,7 @@ android:layout_height="wrap_content">
 </LinearLayout>
 ```
 
-- StudyFragment.java소스
+- StudyFragment.java소스 (클릭마다 앞, 뒤가 바뀐다.)
 
 ![앞](https://user-images.githubusercontent.com/71477375/160102041-719bb2f2-8328-4dcc-a550-631eda93a775.PNG)
 ![뒤](https://user-images.githubusercontent.com/71477375/160102044-a79efd14-11ff-40c3-b6ac-d42cd17fa7c5.PNG)
