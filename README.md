@@ -699,7 +699,9 @@ public void MyAlterDialog(){
 </FrameLayout>
 ```
 
-- include에 넣을 xml인 card_view를 만들어준다.
+- include에 넣을 xml인 card_view를 만들어준다.(그림은 card_view를 include layout에 넣었을 때)
+
+![앞](https://user-images.githubusercontent.com/71477375/160102041-719bb2f2-8328-4dcc-a550-631eda93a775.PNG)
 
 ```java     
 <LinearLayout
@@ -715,4 +717,56 @@ android:layout_height="wrap_content">
         android:textStyle="bold" />
         
 </LinearLayout>
+```
+
+- StudyFragment.java소스
+
+![앞](https://user-images.githubusercontent.com/71477375/160102041-719bb2f2-8328-4dcc-a550-631eda93a775.PNG)
+![뒤](https://user-images.githubusercontent.com/71477375/160102044-a79efd14-11ff-40c3-b6ac-d42cd17fa7c5.PNG)
+
+```java     
+public class StudyFragment extends Fragment {
+    //textView 뒤집기
+    private TextView clickTextView;
+    private boolean viewClickCheck;
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_study, container, false);
+
+        //inclue layout의 textView 뒤집기
+        clickTextView = rootView.findViewById(R.id.cardTextView);
+        clickTextView.setOnClickListener(new View.OnClickListener() {
+            //텍스트를 누르면 Y축 90식 회전을 시키는데
+            @Override
+            public void onClick(View v) {
+                clickTextView.animate().withLayer()
+                        .rotationY(90) //Y축 회전
+                        .setDuration(150) //시간
+                        .withEndAction(new Runnable() {
+                            //반복해서 누를 때 마다 스레드로 계속해서 바꿔주는 것
+                            @Override
+                            public void run() {
+                                //앞
+                                if (!viewClickCheck) {
+                                    clickTextView.setText("여기는 앞!!");
+                                    viewClickCheck = true;
+                                }
+                                //뒤
+                                else {
+                                    clickTextView.setText("여기는 뒤!!");
+                                    viewClickCheck = false;
+                                }
+                                clickTextView.setRotationY(-90); //Y축 복구
+                                clickTextView.animate().withLayer()
+                                        .rotationY(0)
+                                        .setDuration(250) //시간
+                                        .start();
+                            }
+                        }).start();
+            }
+        });
+
+        return rootView;
+    }
+}
 ```
